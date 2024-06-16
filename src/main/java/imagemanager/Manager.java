@@ -5,6 +5,7 @@
 package imagemanager;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 //TODO: implement add tags to images
 //TODO: implement search functions
@@ -46,8 +47,9 @@ public class Manager {
      *
      * @param path the path/url to the folder
      */
-    public void scanAll(String path) {
+    public File[] scanAll(String path) {
         File folder = new File(path);
+        ArrayList<File> filesReturn = new ArrayList<>();
         if (folder.exists() && folder.isDirectory()) {
             File[] files = folder.listFiles();
             if (files != null) {
@@ -57,12 +59,15 @@ public class Manager {
                     } else {
                         String fileName = file.getName().toLowerCase();
                         if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif")) {
-                            this.add(file.toURI().toString());
+                            if (this.add(file.toURI().toString())){
+                               filesReturn.add(file);
+                            }
                         }
                     }
                 }
             }
         }
+        return filesReturn.toArray(new File[0]);
     }
 
     /**

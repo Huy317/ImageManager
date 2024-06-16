@@ -184,7 +184,8 @@ public class MainFrame extends javax.swing.JFrame {
         if (x == JFileChooser.APPROVE_OPTION) {
             File path = new File(fileChooser.getSelectedFile().toString());
             fileChooser.setAcceptAllFileFilterUsed(false);
-            File allFiles[] = path.listFiles();
+            //File allFiles[] = path.listFiles();
+            File allFiles[] = manager.scanAll(path.toString());
             allImages = new BufferedImage[allFiles.length];
             JButton button[] = new JButton[allFiles.length];
             imagePreview.setLayout(new GridLayout( (int) Math.round(Math.ceil(allFiles.length / 5)) ,5 ));
