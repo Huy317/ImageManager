@@ -34,6 +34,11 @@ public class Manager {
         return this.add(im);
     }
 
+    public String[] getImagePath(){
+        return map.keySet().toArray(new String[0]);
+    }
+    
+    
 
     /**
      * Scan for ALL images inside a folder/subfolders

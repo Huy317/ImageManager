@@ -1,7 +1,11 @@
+imagemanager\Tag.class
+imagemanager\Manager.class
 Frame\MainFrame$2.class
+imagemanager\Image.class
 Frame\MainFrame$1.class
 Frame\MainFrame$4.class
 imagemanager\ImageManager.class
+imagemanager\TagManager.class
 Frame\MainFrame$5.class
 Frame\MainFrame.class
 Frame\MainFrame$3.class
