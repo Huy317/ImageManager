@@ -86,5 +86,8 @@ public class Image implements Serializable {
             addTag(tag);
         }
     }
+    public boolean removeTag(Tag tag){
+        return tags.remove(tag);
+    }
 }
 

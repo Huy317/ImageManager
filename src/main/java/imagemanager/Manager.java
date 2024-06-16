@@ -9,20 +9,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 //TODO: implement add tags to images
 //TODO: implement search functions
+
 public class Manager {
+
     private static Manager instance;
     private final HashMap<String, Image> map = new HashMap<String, Image>();
 
-    public Manager(){
+    public Manager() {
     }
-    public static synchronized Manager getInstance(){
-        if (instance == null){
+
+    public static synchronized Manager getInstance() {
+        if (instance == null) {
             instance = new Manager();
         }
         return instance;
     }
+
     public boolean add(Image im) {
-        if (im == null) return false;
+        if (im == null) {
+            return false;
+        }
         if (map.get(im.getPath()) == null) {
             map.put(im.getPath(), im);
             return true;
@@ -35,17 +41,49 @@ public class Manager {
         return this.add(im);
     }
 
-    public String[] getImagePath(){
-        return map.keySet().toArray(new String[0]);
+    public boolean addTag(Image image, Tag tag) {
+        if (hasImage(image)){
+            image.addTag(tag);
+            return true;
+        }
+        return false; // image doesn't exist
+    }
+    
+        public boolean addTag(Image image, Tag[] tags) {
+        if (hasImage(image)){
+            image.addTag(tags);
+            return true;
+        }
+        return false; // image doesn't exist
     }
     
     
+    public boolean hasImage(Image im) {
+        if (im == null) {
+            return false;
+        }
+        if (map.get(im.getPath()) == null) {
+            map.put(im.getPath(), im);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean hasImage(String path){
+        Image im = new Image(path);
+        return this.hasImage(im);
+    }
+    
+    public String[] getImagePath() {
+        return map.keySet().toArray(new String[0]);
+    }
 
     /**
-     * Scan for ALL images inside a folder/subfolders
-     * uses Recrusions
+     * Scan for ALL images inside a folder/subfolders uses Recrusions
      *
      * @param path the path/url to the folder
+     * 
+     * @return File[] containing all images in folder
      */
     public File[] scanAll(String path) {
         File folder = new File(path);
@@ -59,8 +97,8 @@ public class Manager {
                     } else {
                         String fileName = file.getName().toLowerCase();
                         if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif")) {
-                            if (this.add(file.toURI().toString())){
-                               filesReturn.add(file);
+                            if (this.add(file.toURI().toString())) {
+                                filesReturn.add(file);
                             }
                         }
                     }
@@ -71,13 +109,15 @@ public class Manager {
     }
 
     /**
-     * Scan for images in selected folder ONLY
-     * Does not use recursion
+     * Scan for images in selected folder ONLY Does not use recursion
      *
      * @param path the path/url to the folder
+     * 
+     * @return File[] containing all images in folder
      */
-    public void scanOneFolder(String path) {
+    public File[] scanOneFolder(String path) {
         File folder = new File(path);
+        ArrayList<File> filesReturn = new ArrayList<>();
         if (folder.exists() && folder.isDirectory()) {
             File[] files = folder.listFiles();
             if (files != null) {
@@ -85,15 +125,18 @@ public class Manager {
                     if (!file.isDirectory()) {
                         String fileName = file.getName().toLowerCase();
                         if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif")) {
-                            this.add(file.toURI().toString());
+                            if (this.add(file.toURI().toString())) {
+                                filesReturn.add(file);
+                            }
                         }
                     }
                 }
             }
         }
+        return filesReturn.toArray(new File[0]);
     }
 
-    public int getSize(){
+    public int getSize() {
         return map.size();
     }
 
@@ -126,4 +169,3 @@ public class Manager {
         }
     }
 }
-
