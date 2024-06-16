@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Frame;
-
+import imagemanager.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -23,7 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author ADMIN
  */
 public class MainFrame extends javax.swing.JFrame {
-
+    private final Manager manager = Manager.getInstance();
     /**
      * Creates new form MainFrame
      */
