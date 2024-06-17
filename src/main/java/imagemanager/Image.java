@@ -75,6 +75,7 @@ public class Image implements Serializable {
             return false;
         }
         tags.add(tag);
+        tag.incrementCount();
         return true;
     }
 
@@ -87,7 +88,11 @@ public class Image implements Serializable {
         }
     }
     public boolean removeTag(Tag tag){
-        return tags.remove(tag);
+        if (tags.remove(tag)){
+            tag.decrementCount();
+            return true;
+        }
+        return false;
     }
 }
 

@@ -37,11 +37,12 @@ public class TagManager {
         return map.get(name);
     }
     public ArrayList<Tag> getTagList() {
-        return new ArrayList<Tag>(map.values());
+        return new ArrayList<>(map.values());
     }
     public int getSize(){
         return map.size();
     }
+    
     public void writeTo(String path) {
         try {
             FileOutputStream fos = new FileOutputStream(path);

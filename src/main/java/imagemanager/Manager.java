@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Manager {
 
     private static Manager instance;
-    private final HashMap<String, Image> map = new HashMap<String, Image>();
+    private final HashMap<String, Image> map = new HashMap<>();
 
     public Manager() {
     }
@@ -35,27 +35,27 @@ public class Manager {
         }
         return false;
     }
-
-    public boolean add(String path) {
+    
+    private boolean add(String path) {
         Image im = new Image(path);
         return this.add(im);
     }
 
-    public boolean addTag(Image image, Tag tag) {
-        if (hasImage(image)){
-            image.addTag(tag);
-            return true;
-        }
-        return false; // image doesn't exist
-    }
-    
-        public boolean addTag(Image image, Tag[] tags) {
-        if (hasImage(image)){
-            image.addTag(tags);
-            return true;
-        }
-        return false; // image doesn't exist
-    }
+//    public boolean addTag(Image image, Tag tag) {
+//        if (hasImage(image)){
+//            image.addTag(tag);
+//            return true;
+//        }
+//        return false; // image doesn't exist
+//    }
+//    
+//        public boolean addTag(Image image, Tag[] tags) {
+//        if (hasImage(image)){
+//            image.addTag(tags);
+//            return true;
+//        }
+//        return false; // image doesn't exist
+//    }
     
     
     public boolean hasImage(Image im) {

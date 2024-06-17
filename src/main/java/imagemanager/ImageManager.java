@@ -5,7 +5,7 @@
 package imagemanager;
 
 import Frame.MainFrame;
-
+import imagemanager.*;
 /**
  *
  * @author ADMIN
@@ -13,6 +13,9 @@ import Frame.MainFrame;
 public class ImageManager {
 
     public static void main(String[] args) {
+        Manager manager = Manager.getInstance();
+        TagManager tagManager = TagManager.getInstance();
+
         MainFrame frame = new MainFrame();
         frame.setVisible(true);
     }
