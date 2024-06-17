@@ -6,6 +6,9 @@ package Frame;
 import imagemanager.*;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Label;
@@ -188,23 +191,31 @@ public class MainFrame extends javax.swing.JFrame {
             File allFiles[] = manager.scanAll(path.toString());
             allImages = new BufferedImage[allFiles.length];
             JButton button[] = new JButton[allFiles.length];
-            imagePreview.setLayout(new GridLayout( (int) Math.round(Math.ceil(allFiles.length / 5)) ,5 ));
+            //int minRows = (int) Math.round(Math.ceil(allFiles.length / 5));
+            imagePreview.setLayout(new GridLayout(0,5));
+            
             for(int i = 0; i < allFiles.length; i++){
                 try {
                     allImages[i] = ImageIO.read(allFiles[i]);
                     button[i] = new JButton();
                     ImageIcon icon = new ImageIcon(allImages[i]);
                     Image image = icon.getImage();
-                    Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
+                    Dimension imgSize = new Dimension(icon.getIconWidth(), icon.getIconHeight());
+                    Dimension boundary = new Dimension(144,144);
+                    Dimension scaled = getScaledDimension(imgSize, boundary);
+                    Image newimg = image.getScaledInstance(scaled.width, scaled.height,  java.awt.Image.SCALE_SMOOTH);
                     ImageIcon iconNew = new ImageIcon(newimg);
                     button[i].setBackground(Color.WHITE);
                     button[i].setPreferredSize(new Dimension(100,100));
                     button[i].setIcon(iconNew);
                     imagePreview.add(button[i]);
+                    
                 } catch (Exception e) {
                     
                 }
             }
+            System.out.println(imagePreview.getSize());
+            
             setVisible(true);
             
         }
@@ -224,6 +235,33 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchActionPerformed
 
+    private Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {
+
+    int original_width = imgSize.width;
+    int original_height = imgSize.height;
+    int bound_width = boundary.width;
+    int bound_height = boundary.height;
+    int new_width = original_width;
+    int new_height = original_height;
+
+    // first check if we need to scale width
+    if (original_width > bound_width) {
+        //scale width to fit
+        new_width = bound_width;
+        //scale height to maintain aspect ratio
+        new_height = (new_width * original_height) / original_width;
+    }
+
+    // then check if we need to scale even with the new height
+    if (new_height > bound_height) {
+        //scale height to fit instead
+        new_height = bound_height;
+        //scale width to maintain aspect ratio
+        new_width = (new_height * original_width) / original_height;
+    }
+
+    return new Dimension(new_width, new_height);
+}
     /**
      * @param args the command line arguments
      */
