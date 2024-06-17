@@ -35,12 +35,12 @@
             <Property name="text" type="java.lang.String" value="Tag name:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="NameText">
+        <Component class="javax.swing.JTextField" name="nameText">
           <Properties>
             <Property name="columns" type="int" value="20"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NameTextActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameTextActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

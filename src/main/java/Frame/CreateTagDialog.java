@@ -3,13 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package Frame;
-
+import imagemanager.*;
+import javax.swing.JOptionPane;
+        
 /**
  *
  * @author GIA HUY
  */
 public class CreateTagDialog extends javax.swing.JDialog {
-
+    private TagManager tagManager = TagManager.getInstance();
     /**
      * Creates new form CreateTagDialog
      */
@@ -29,7 +31,7 @@ public class CreateTagDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
-        NameText = new javax.swing.JTextField();
+        nameText = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         CreateButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
@@ -40,13 +42,13 @@ public class CreateTagDialog extends javax.swing.JDialog {
         nameLabel.setText("Tag name:");
         jPanel1.add(nameLabel);
 
-        NameText.setColumns(20);
-        NameText.addActionListener(new java.awt.event.ActionListener() {
+        nameText.setColumns(20);
+        nameText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NameTextActionPerformed(evt);
+                nameTextActionPerformed(evt);
             }
         });
-        jPanel1.add(NameText);
+        jPanel1.add(nameText);
 
         getContentPane().add(jPanel1);
 
@@ -71,16 +73,25 @@ public class CreateTagDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextActionPerformed
+    private void nameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NameTextActionPerformed
+    }//GEN-LAST:event_nameTextActionPerformed
 
     private void CreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateButtonActionPerformed
         // TODO add your handling code here:
+        if (!nameText.getText().equals("")){
+            Tag tag = new Tag(nameText.getText());
+            if (tagManager.add(tag)){
+                JOptionPane.showMessageDialog(null, "Tag has been created", "Success", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "This tag already exists", "Unsuccess", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_CreateButtonActionPerformed
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     /**
@@ -128,9 +139,9 @@ public class CreateTagDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton CreateButton;
-    private javax.swing.JTextField NameText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField nameText;
     // End of variables declaration//GEN-END:variables
 }
