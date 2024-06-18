@@ -17,6 +17,7 @@ public class TagManager {
     private final HashMap<String, Tag> map = new HashMap<>();
     private static TagManager instance;
     public TagManager(){
+        this.readFrom("tag.data");
     }
     // Using singleton pattern so there's only one instance of this class exists
     public static synchronized TagManager getInstance(){
