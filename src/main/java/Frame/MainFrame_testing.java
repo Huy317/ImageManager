@@ -21,15 +21,16 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JScrollPane;
-import javax.swing.JFrame;
+
 /**
  *
  * @author ADMIN
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame_testing extends javax.swing.JFrame {
 
     private final Manager manager = Manager.getInstance();
     private TagManager tagManager = TagManager.getInstance();
@@ -38,10 +39,10 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public MainFrame_testing() {
         initComponents();
-        setSize(1280, 720);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setSize(1280, 720);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
     
     }
@@ -63,12 +64,12 @@ public class MainFrame extends javax.swing.JFrame {
         folderList = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        propertiesList = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
         displayImage = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         imagePreview = new javax.swing.JPanel();
+        propertiesList = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
         MenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         saveData = new javax.swing.JMenuItem();
@@ -108,39 +109,36 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        folderList.setLayout(new java.awt.CardLayout());
+        folderList.setLayout(new java.awt.GridLayout(1, 1));
 
         jList1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Image List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SFU Futura", 0, 12))); // NOI18N
         jList1.setFont(new java.awt.Font("SFU Futura", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(jList1);
 
-        folderList.add(jScrollPane1, "card2");
+        folderList.add(jScrollPane1);
 
         mainPanel.add(folderList, java.awt.BorderLayout.LINE_START);
 
-        propertiesList.setLayout(new java.awt.CardLayout());
-
-        jList2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Properties", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SFU Futura", 0, 12))); // NOI18N
-        jList2.setFont(new java.awt.Font("SFU Futura", 0, 14)); // NOI18N
-        jScrollPane2.setViewportView(jList2);
-
-        propertiesList.add(jScrollPane2, "card2");
-
-        mainPanel.add(propertiesList, java.awt.BorderLayout.LINE_END);
-
         displayImage.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Image Preview", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SFU Futura", 0, 12))); // NOI18N
-        displayImage.setMinimumSize(new java.awt.Dimension(264, 151));
+        displayImage.setMinimumSize(new java.awt.Dimension(427, 47));
         displayImage.setLayout(new java.awt.GridLayout(1, 1));
 
-        jScrollPane3.setPreferredSize(new java.awt.Dimension(258, 130));
-
-        imagePreview.setMaximumSize(new java.awt.Dimension(1000, 32767));
-        imagePreview.setLayout(null);
+        imagePreview.setLayout(new java.awt.GridLayout(0, 4));
         jScrollPane3.setViewportView(imagePreview);
 
         displayImage.add(jScrollPane3);
 
         mainPanel.add(displayImage, java.awt.BorderLayout.CENTER);
+
+        propertiesList.setLayout(new java.awt.GridLayout(1, 1));
+
+        jList2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Properties", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SFU Futura", 0, 12))); // NOI18N
+        jList2.setFont(new java.awt.Font("SFU Futura", 0, 14)); // NOI18N
+        jScrollPane2.setViewportView(jList2);
+
+        propertiesList.add(jScrollPane2);
+
+        mainPanel.add(propertiesList, java.awt.BorderLayout.LINE_END);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
 
@@ -193,14 +191,14 @@ public class MainFrame extends javax.swing.JFrame {
     private void importFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFolderActionPerformed
         // TODO add your handling code here:
 //        BufferedImage[] allImages;
-        jScrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        //jScrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        //jScrollPane3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         JFileChooser fileChooser = new JFileChooser(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Pictures"));
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.setMultiSelectionEnabled(false);
         int x = fileChooser.showDialog(this, "Open");
         if (x == JFileChooser.APPROVE_OPTION) {
-            imagePreview.setLayout(new GridLayout(0, 4));
+            //imagePreview.setLayout(new GridLayout(0, 4));
             loadImages(fileChooser.getSelectedFile().toString());
             //imagePreview.setPreferredSize(imagePreview.getPreferredSize());
 
@@ -233,7 +231,8 @@ public class MainFrame extends javax.swing.JFrame {
                 imgButton.setText("");
                 Image image = imgIcon.getImage();
                 Dimension imgSize = new Dimension(imgIcon.getIconWidth(), imgIcon.getIconHeight());
-                Dimension boundary = new Dimension(145, 145); 
+                int boundaryWidth = imagePreview.getSize().width - (imagePreview.getSize().width*3/4);
+                Dimension boundary = new Dimension((int)boundaryWidth/4, (int)boundaryWidth/4);
                 Dimension scaled = getScaledDimension(imgSize, boundary);
                 Image newimg = image.getScaledInstance(scaled.width, scaled.height, java.awt.Image.SCALE_SMOOTH);
                 imgIcon = new ImageIcon(newimg);
@@ -241,7 +240,7 @@ public class MainFrame extends javax.swing.JFrame {
                 imgButton.setBackground(Color.WHITE);
                 imgButton.addActionListener((e) -> {
                     System.out.println(imgButton.getSize());
-                    
+                    System.out.println(imagePreview.getSize());
                 });
                 imagePreview.add(imgButton);
             } catch (Exception e) {
@@ -302,23 +301,21 @@ public class MainFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame_testing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame_testing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame_testing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame_testing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainFrame_testing().setVisible(true);
             }
         });
     }

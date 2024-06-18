@@ -17,10 +17,14 @@ public class ImageButton extends JButton {
         super(icon);
     }
 
-    public ImageButton(String path, Icon icon) {
-        super(icon);
+
+    public ImageButton(String path, String text) {
+        super(text);
         this.path = path;
     }
+
+    
+    
     public String getPath(){
         return this.path;
     }
