@@ -242,16 +242,14 @@ public class MainFrame extends javax.swing.JFrame {
                 imgButton.setIcon(imgIcon);
                 imgButton.setBackground(Color.WHITE);
                 imgButton.addActionListener((e) -> {
-                    System.out.println(imgButton.getSize());
+                    System.out.println(imgButton.getPath());
                     
                 });
                 imagePreview.add(imgButton);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-
         }
-
     }
 
 
