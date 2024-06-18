@@ -60,7 +60,7 @@ public class MainFrame extends javax.swing.JFrame {
         searchField = new javax.swing.JTextField();
         search = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
-        folderList = new javax.swing.JPanel();
+        tagList = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         propertiesList = new javax.swing.JPanel();
@@ -85,7 +85,7 @@ public class MainFrame extends javax.swing.JFrame {
         toolBar.setRollover(true);
 
         searchCategories.setFont(new java.awt.Font("SFU Futura", 0, 12)); // NOI18N
-        searchCategories.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        searchCategories.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name", "Tag" }));
         toolBar.add(searchCategories);
 
         searchField.setColumns(10);
@@ -108,15 +108,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        folderList.setLayout(new java.awt.CardLayout());
+        tagList.setLayout(new java.awt.CardLayout());
 
         jList1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Image List", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SFU Futura", 0, 12))); // NOI18N
         jList1.setFont(new java.awt.Font("SFU Futura", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(jList1);
+        jList1.getAccessibleContext().setAccessibleName("");
 
-        folderList.add(jScrollPane1, "card2");
+        tagList.add(jScrollPane1, "card2");
 
-        mainPanel.add(folderList, java.awt.BorderLayout.LINE_START);
+        mainPanel.add(tagList, java.awt.BorderLayout.LINE_START);
+        tagList.getAccessibleContext().setAccessibleName("");
 
         propertiesList.setLayout(new java.awt.CardLayout());
 
@@ -356,7 +358,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel displayImage;
     private javax.swing.JMenuItem exit;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JPanel folderList;
     private javax.swing.JPanel imagePreview;
     private javax.swing.JMenuItem importFolder;
     private javax.swing.JMenuItem importImage;
@@ -372,6 +373,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton search;
     private javax.swing.JComboBox<String> searchCategories;
     private javax.swing.JTextField searchField;
+    private javax.swing.JPanel tagList;
     private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 }
