@@ -12,13 +12,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -39,6 +47,7 @@ public class MainFrame2 extends javax.swing.JFrame {
     public MainFrame2() {
         initComponents();
         setSize(1280, 720);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -64,6 +73,8 @@ public class MainFrame2 extends javax.swing.JFrame {
         exitMenuButton = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         importFolderMenuButton = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        editTag = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,6 +152,18 @@ public class MainFrame2 extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Tag Menu");
+
+        editTag.setText("Edit Tag");
+        editTag.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTagActionPerformed(evt);
+            }
+        });
+        jMenu3.add(editTag);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -192,9 +215,28 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_editTagButtonActionPerformed
 
+    private void editTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagActionPerformed
+        // TODO add your handling code here:
+        TagManagerMenu tagManagerMenu = new TagManagerMenu(this, rootPaneCheckingEnabled);
+        tagManagerMenu.setLocationRelativeTo(this);
+        tagManagerMenu.setVisible(true);
+        
+    }//GEN-LAST:event_editTagActionPerformed
+
     private void loadImages(String folderPath) {
         imagePanel.removeAll();
-
+        
+        JPopupMenu popMenu = new JPopupMenu();
+        JMenuItem option1 = new JMenuItem("Add tag");
+        option1.setActionCommand("addTag");
+        option1.addActionListener((e) -> {
+                TagPopupDialog popupDialog = new TagPopupDialog(this, rootPaneCheckingEnabled);
+                popupDialog.setLocationRelativeTo(this);
+                popupDialog.setVisible(true);
+        });
+        popMenu.add(option1);
+        
+        
         File[] allFiles = manager.scanOneFolder(folderPath);
         imagePreview = new JPanel();
         imagePreview.setLayout(new GridLayout(0, 4));
@@ -214,6 +256,27 @@ public class MainFrame2 extends javax.swing.JFrame {
                 imgButton.addActionListener((e) -> {
                     //System.out.println(imgButton.getPath());
                     selectedImage2 = manager.getImage2(imgButton.getPath());
+                });
+                imgButton.addMouseListener(new MouseListener(){
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                    }
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        if (SwingUtilities.isRightMouseButton(e)) {
+                            popMenu.show(imgButton, e.getX(), e.getY());
+                        }
+                    }
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                    }
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                    }
+                    
                 });
                 imagePreview.add(imgButton);
             } catch (Exception e) {
@@ -297,14 +360,18 @@ public class MainFrame2 extends javax.swing.JFrame {
             }
         });
     }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem editTag;
     private javax.swing.JButton editTagButton;
     private javax.swing.JMenuItem exitMenuButton;
     private javax.swing.JPanel imagePanel;
     private javax.swing.JMenuItem importFolderMenuButton;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;

@@ -22,8 +22,6 @@ public class ImageButton extends JButton {
         super(text);
         this.path = path;
     }
-
-    
     
     public String getPath(){
         return this.path;
