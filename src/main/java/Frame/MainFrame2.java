@@ -179,7 +179,8 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     private void saveMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuButtonActionPerformed
         // TODO add your handling code here:
-
+        tagManager.writeTo(TagManager.DEFAULT_SAVING_PATH);
+        manager.writeTo(Manager.DEFAULT_SAVING_PATH);
     }//GEN-LAST:event_saveMenuButtonActionPerformed
 
     private void exitMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuButtonActionPerformed
@@ -261,7 +262,6 @@ public class MainFrame2 extends javax.swing.JFrame {
                     selectedButton = imgButton;
                     imgButton.setBackground(Color.LIGHT_GRAY);
                     imgButton.setOpaque(true);
-                    
                     selectedImage2 = manager.getImage2(imgButton.getPath());
                 });
                 imgButton.addMouseListener(new MouseListener(){

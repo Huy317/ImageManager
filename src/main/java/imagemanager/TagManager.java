@@ -14,6 +14,7 @@ import java.util.HashMap;
 */
 //TODO: implement search functions
 public class TagManager {
+    public static String DEFAULT_SAVING_PATH = "tag.data";
     private final HashMap<String, Tag> map = new HashMap<>();
     private static TagManager instance;
     public TagManager(){

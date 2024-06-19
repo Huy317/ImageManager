@@ -11,11 +11,12 @@ import java.util.HashMap;
 //TODO: implement search functions
 
 public class Manager {
-
+    public static String DEFAULT_SAVING_PATH = "image.data";
     private static Manager instance;
     private final HashMap<String, Image2> map = new HashMap<>();
 
     public Manager() {
+        this.readFrom(DEFAULT_SAVING_PATH);
     }
 
     public static synchronized Manager getInstance() {
