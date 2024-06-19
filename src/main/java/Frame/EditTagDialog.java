@@ -7,7 +7,9 @@ package Frame;
 import imagemanager.Manager;
 import imagemanager.TagManager;
 import imagemanager.*;
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -23,7 +25,8 @@ public class EditTagDialog extends javax.swing.JDialog {
     private Manager manager = Manager.getInstance();
     private JScrollPane imageTagScroll, tagScroll;
     private JPanel imagePanel, TagPanel;
-    private ArrayList<JButton> imageTagButtons, tagButtons;
+    private ArrayList<JButton> imageTagButtons = new ArrayList<>();
+    private ArrayList<JButton> tagButtons = new ArrayList<>();
 
     /**
      * Creates new form EditTagDialog
@@ -37,7 +40,7 @@ public class EditTagDialog extends javax.swing.JDialog {
     public EditTagDialog(java.awt.Frame parent, boolean modal, Image2 image) {
         super(parent, modal);
         initComponents();
-
+        load(image);
         setVisible(true);
     }
 
@@ -78,7 +81,11 @@ public class EditTagDialog extends javax.swing.JDialog {
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         mainPanel.setLayout(new java.awt.GridLayout(1, 2));
+
+        tagListPanel.setLayout(new java.awt.BorderLayout());
         mainPanel.add(tagListPanel);
+
+        imageTagPanel.setLayout(new java.awt.BorderLayout());
         mainPanel.add(imageTagPanel);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
@@ -97,8 +104,8 @@ public class EditTagDialog extends javax.swing.JDialog {
     public void load(Image2 image) {
         ArrayList<Tag> tags = tagManager.getTagList();
         ArrayList<Tag> imageTags = image.getTags();
-        TagPanel = new JPanel(new FlowLayout());
-        imagePanel = new JPanel(new FlowLayout());
+        TagPanel = new JPanel(new GridLayout(0,4));
+        imagePanel = new JPanel(new GridLayout(0,4));
         for (Tag t : imageTags) {
             JButton button = new JButton(t.getName());
             button.addActionListener((e) -> {
@@ -110,7 +117,21 @@ public class EditTagDialog extends javax.swing.JDialog {
         imageTagScroll = new JScrollPane(imagePanel);
         imageTagScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         imageTagScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        imageTagScroll.add(imagePanel);
+        imageTagPanel.add(imageTagScroll,BorderLayout.CENTER);
+        
+        for(Tag t : tags){
+            JButton button = new JButton(t.getName());
+            button.addActionListener((e) -> {
+
+            });
+            tagButtons.add(button);
+            TagPanel.add(button);
+        }
+        tagScroll = new JScrollPane(TagPanel);
+        tagScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        tagScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        tagListPanel.add(tagScroll,BorderLayout.CENTER);
+        pack();
     }
 
     /**

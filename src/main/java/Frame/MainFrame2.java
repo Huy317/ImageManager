@@ -39,7 +39,7 @@ public class MainFrame2 extends javax.swing.JFrame {
     private JScrollPane imagePreviewScroll, propertiesScroll;
     private JPanel imagePreview, properties;
     private Image2 selectedImage2;
-
+    private ImageButton selectedButton;
     //private Image selectedImage;
     /**
      * Creates new form MainFrame2
@@ -252,9 +252,16 @@ public class MainFrame2 extends javax.swing.JFrame {
                 Image newimg = image.getScaledInstance(scaled.width, scaled.height, java.awt.Image.SCALE_SMOOTH);
                 imgIcon = new ImageIcon(newimg);
                 imgButton.setIcon(imgIcon);
-                imgButton.setBackground(Color.WHITE);
                 imgButton.addActionListener((e) -> {
                     //System.out.println(imgButton.getPath());
+                    if (selectedButton != null){
+                        selectedButton.setBackground(Color.WHITE);
+                        selectedButton.setOpaque(false);
+                    }
+                    selectedButton = imgButton;
+                    imgButton.setBackground(Color.LIGHT_GRAY);
+                    imgButton.setOpaque(true);
+                    
                     selectedImage2 = manager.getImage2(imgButton.getPath());
                 });
                 imgButton.addMouseListener(new MouseListener(){
@@ -291,6 +298,9 @@ public class MainFrame2 extends javax.swing.JFrame {
         //hacky fix but it works, don't question
         this.setSize(1281, 721);
         this.setSize(1280, 720);
+        if (allFiles.length <= 4){
+            pack();
+        }
     }
 
     public void cleanUp() {

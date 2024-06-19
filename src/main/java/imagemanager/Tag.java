@@ -36,5 +36,10 @@ public class Tag {
     public void decrementCount() {
         this.count--;
     }
+
+    public boolean equals(Tag otherTag){
+        return name.equals(otherTag.getName());
+    }
+          
 }
 
