@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Frame;
+
 import imagemanager.Image2;
 import imagemanager.Manager;
 import imagemanager.TagManager;
@@ -27,9 +28,10 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     private Manager manager = Manager.getInstance();
     private TagManager tagManager = TagManager.getInstance();
-    private JScrollPane imagePreviewScroll,propertiesScroll;
+    private JScrollPane imagePreviewScroll, propertiesScroll;
     private JPanel imagePreview, properties;
     private Image2 selectedImage2;
+
     //private Image selectedImage;
     /**
      * Creates new form MainFrame2
@@ -154,7 +156,7 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     private void saveMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuButtonActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_saveMenuButtonActionPerformed
 
     private void exitMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuButtonActionPerformed
@@ -171,7 +173,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         fileChooser.setMultiSelectionEnabled(false);
         int x = fileChooser.showDialog(this, "Open");
         if (x == JFileChooser.APPROVE_OPTION) {
-            
+
             loadImages(fileChooser.getSelectedFile().toString());
             //setVisible(true);
 
@@ -180,19 +182,19 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     private void editTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagButtonActionPerformed
         // TODO add your handling code here:
-        if (selectedImage2 != null){
+        if (selectedImage2 != null) {
             EditTagDialog edit = new EditTagDialog(this, true, selectedImage2);
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Please select an image first","Warning",JOptionPane.WARNING_MESSAGE);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select an image first", "Warning", JOptionPane.WARNING_MESSAGE);
         }
-        
-        
+
+
     }//GEN-LAST:event_editTagButtonActionPerformed
 
     private void loadImages(String folderPath) {
         imagePanel.removeAll();
-        
+
         File[] allFiles = manager.scanOneFolder(folderPath);
         imagePreview = new JPanel();
         imagePreview.setLayout(new GridLayout(0, 4));
@@ -203,7 +205,7 @@ public class MainFrame2 extends javax.swing.JFrame {
                 imgButton.setText("");
                 Image image = imgIcon.getImage();
                 Dimension imgSize = new Dimension(imgIcon.getIconWidth(), imgIcon.getIconHeight());
-                Dimension boundary = new Dimension((int)1136/5, (int)1136/5);
+                Dimension boundary = new Dimension((int) 1136 / 5, (int) 1136 / 5);
                 Dimension scaled = getScaledDimension(imgSize, boundary);
                 Image newimg = image.getScaledInstance(scaled.width, scaled.height, java.awt.Image.SCALE_SMOOTH);
                 imgIcon = new ImageIcon(newimg);
@@ -221,17 +223,16 @@ public class MainFrame2 extends javax.swing.JFrame {
         imagePreviewScroll = new JScrollPane(imagePreview);
         imagePreviewScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         imagePreviewScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        
-        //imagePreviewScroll.setViewportView(imagePreview);
-        imagePanel.add(imagePreviewScroll,BorderLayout.CENTER);
-        
-        this.setSize(1281,721);
-        this.setSize(1280,720);
+        imagePanel.add(imagePreviewScroll, BorderLayout.CENTER);
+
+        //hacky fix but it works, don't question
+        this.setSize(1281, 721);
+        this.setSize(1280, 720);
     }
-    
-    public void cleanUp(){
+
+    public void cleanUp() {
         imagePanel.removeAll();
-        
+
     }
 
     private Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {
