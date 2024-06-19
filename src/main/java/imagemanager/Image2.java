@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * It has a path and a list of tags.
  * @author Huy
  */
-public class Image implements Serializable {
+public class Image2 implements Serializable {
     private String path;
     private final ArrayList<Tag> tags = new ArrayList<>();
     private final TagManager tagManager = TagManager.getInstance();
@@ -20,11 +20,11 @@ public class Image implements Serializable {
     /**
      * @param path url of the image i.e: "D:\\Images\example.jpg"
      */
-    public Image(String path) {
+    public Image2(String path) {
         this.path = path;
     }
 
-    public Image() {
+    public Image2() {
     }
 
     /**

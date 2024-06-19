@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Frame;
-
+import imagemanager.Image2;
 import imagemanager.Manager;
 import imagemanager.TagManager;
 import java.awt.BorderLayout;
@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -28,6 +29,8 @@ public class MainFrame2 extends javax.swing.JFrame {
     private TagManager tagManager = TagManager.getInstance();
     private JScrollPane imagePreviewScroll,propertiesScroll;
     private JPanel imagePreview, properties;
+    private Image2 selectedImage2;
+    //private Image selectedImage;
     /**
      * Creates new form MainFrame2
      */
@@ -52,6 +55,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         imagePanel = new javax.swing.JPanel();
         propertiesPanel = new javax.swing.JPanel();
+        editTagButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         saveMenuButton = new javax.swing.JMenuItem();
@@ -90,6 +94,15 @@ public class MainFrame2 extends javax.swing.JFrame {
 
         propertiesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Properties"));
         propertiesPanel.setPreferredSize(new java.awt.Dimension(130, 304));
+
+        editTagButton.setText("Edit Tags");
+        editTagButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTagButtonActionPerformed(evt);
+            }
+        });
+        propertiesPanel.add(editTagButton);
+
         mainPanel.add(propertiesPanel, java.awt.BorderLayout.LINE_END);
 
         getContentPane().add(mainPanel, java.awt.BorderLayout.CENTER);
@@ -141,10 +154,12 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     private void saveMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_saveMenuButtonActionPerformed
 
     private void exitMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuButtonActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_exitMenuButtonActionPerformed
 
     private void importFolderMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFolderMenuButtonActionPerformed
@@ -162,6 +177,18 @@ public class MainFrame2 extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_importFolderMenuButtonActionPerformed
+
+    private void editTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagButtonActionPerformed
+        // TODO add your handling code here:
+        if (selectedImage2 != null){
+            EditTagDialog edit = new EditTagDialog(this, true, selectedImage2);
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select an image first","Warning",JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_editTagButtonActionPerformed
 
     private void loadImages(String folderPath) {
         imagePanel.removeAll();
@@ -183,8 +210,8 @@ public class MainFrame2 extends javax.swing.JFrame {
                 imgButton.setIcon(imgIcon);
                 imgButton.setBackground(Color.WHITE);
                 imgButton.addActionListener((e) -> {
-                    System.out.println(imgButton.getPath());
-
+                    //System.out.println(imgButton.getPath());
+                    selectedImage2 = manager.getImage2(imgButton.getPath());
                 });
                 imagePreview.add(imgButton);
             } catch (Exception e) {
@@ -271,6 +298,7 @@ public class MainFrame2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editTagButton;
     private javax.swing.JMenuItem exitMenuButton;
     private javax.swing.JPanel imagePanel;
     private javax.swing.JMenuItem importFolderMenuButton;

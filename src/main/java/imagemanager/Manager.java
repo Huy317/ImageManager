@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Manager {
 
     private static Manager instance;
-    private final HashMap<String, Image> map = new HashMap<>();
+    private final HashMap<String, Image2> map = new HashMap<>();
 
     public Manager() {
     }
@@ -25,7 +25,7 @@ public class Manager {
         return instance;
     }
 
-    public boolean add(Image im) {
+    public boolean add(Image2 im) {
         if (im == null) {
             return false;
         }
@@ -37,10 +37,13 @@ public class Manager {
     }
     
     private boolean add(String path) {
-        Image im = new Image(path);
+        Image2 im = new Image2(path);
         return this.add(im);
     }
-
+    
+    public Image2 getImage2(String path){
+        return map.get(path);
+    }
 //    public boolean addTag(Image image, Tag tag) {
 //        if (hasImage(image)){
 //            image.addTag(tag);
@@ -58,7 +61,7 @@ public class Manager {
 //    }
     
     
-    public boolean hasImage(Image im) {
+    public boolean hasImage(Image2 im) {
         if (im == null) {
             return false;
         }
@@ -70,7 +73,7 @@ public class Manager {
     }
     
     public boolean hasImage(String path){
-        Image im = new Image(path);
+        Image2 im = new Image2(path);
         return this.hasImage(im);
     }
     
@@ -97,7 +100,7 @@ public class Manager {
                     } else {
                         String fileName = file.getName().toLowerCase();
                         if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif")) {
-                            if (this.add(file.toURI().toString())) {
+                            if (this.add(file.getAbsolutePath())) {
                                 filesReturn.add(file);
                             }
                         }
@@ -125,7 +128,7 @@ public class Manager {
                     if (!file.isDirectory()) {
                         String fileName = file.getName().toLowerCase();
                         if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif")) {
-                            if (this.add(file.toURI().toString())) {
+                            if (this.add(file.getAbsolutePath())) {
                                 filesReturn.add(file);
                             }
                         }
@@ -133,6 +136,7 @@ public class Manager {
                 }
             }
         }
+        System.out.println(toString());
         return filesReturn.toArray(new File[0]);
     }
 
@@ -144,7 +148,7 @@ public class Manager {
         try {
             FileOutputStream fos = new FileOutputStream(path);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            for (Image im : map.values()) {
+            for (Image2 im : map.values()) {
                 oos.writeObject(im);
             }
             oos.close();
@@ -157,8 +161,8 @@ public class Manager {
         try {
             FileInputStream fis = new FileInputStream(path);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            Image im = null;
-            while ((im = (Image) ois.readObject()) != null) {
+            Image2 im = null;
+            while ((im = (Image2) ois.readObject()) != null) {
                 this.add(im);
             }
             ois.close();
@@ -167,5 +171,13 @@ public class Manager {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (String k : map.keySet()){
+            sb.append(k).append(" path: ").append(map.get(k).getPath()).append("\n");
+        }
+        return sb.toString();
     }
 }
