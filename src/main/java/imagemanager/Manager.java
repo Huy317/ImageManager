@@ -136,7 +136,6 @@ public class Manager {
                 }
             }
         }
-        System.out.println(toString());
         return filesReturn.toArray(new File[0]);
     }
 

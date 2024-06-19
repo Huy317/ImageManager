@@ -4,6 +4,7 @@
  */
 package Frame;
 
+import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
@@ -21,6 +22,9 @@ public class ImageButton extends JButton {
     public ImageButton(String path, String text) {
         super(text);
         this.path = path;
+        setBackground(Color.WHITE);
+        setBorderPainted(false);
+        setOpaque(false);
     }
 
     

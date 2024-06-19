@@ -6,16 +6,13 @@ Frame\MainFrame2$3.class
 imagemanager\ImageManager.class
 Frame\MainFrame2$6.class
 imagemanager\TagManager.class
-Frame\MainFrame_testing$3.class
 Frame\MainFrame$3.class
-Frame\MainFrame_testing$2.class
 Frame\MainFrame2$5.class
 Frame\MainFrame2.class
 Frame\MainFrame$1.class
 Frame\EditTagDialog.class
 Frame\CreateTagDialog$3.class
 Frame\EditTagDialog$2.class
-Frame\MainFrame_testing$5.class
 Frame\CreateTagDialog$4.class
 Frame\EditTagDialog$3$1.class
 Frame\MainFrame2$7.class
@@ -31,8 +28,5 @@ Frame\CreateTagDialog$1.class
 Frame\EditTagDialog$1.class
 imagemanager\Manager.class
 Frame\MainFrame$2.class
-Frame\MainFrame_testing$1.class
-Frame\MainFrame_testing$4.class
 Frame\MainFrame$5.class
 Frame\CreateTagDialog.class
-Frame\MainFrame_testing.class
