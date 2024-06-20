@@ -42,7 +42,7 @@ public class TagTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        tagList = new ArrayList<>(tagMap.values());
+        this.tagList = new ArrayList<>(this.tagMap.values());
         Tag tag = tagList.get(rowIndex);
         switch (columnIndex) {
             case 0 -> {
@@ -58,9 +58,11 @@ public class TagTableModel extends AbstractTableModel{
     }
     
     public void removeRow(int rowIndex){
-        if (tagList.remove(tagList.get(rowIndex))){
+        this.tagList = new ArrayList<>(this.tagMap.values());
+        var removeTarget = this.tagList.get(rowIndex);
+        this.tagMap.remove(removeTarget.getName());
+        if (this.tagList.remove(removeTarget)){
             fireTableRowsDeleted(rowIndex,rowIndex);
-            tagMap.remove(tagList.get(rowIndex).getName());
         }
     }
     

@@ -40,7 +40,7 @@ public class TagManagerMenu extends javax.swing.JDialog {
         deleteButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tagTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,10 +66,12 @@ public class TagManagerMenu extends javax.swing.JDialog {
 
         jPanel2.setLayout(new java.awt.CardLayout());
 
-        jTable1.setModel(model);
-        jTable1.setColumnSelectionAllowed(true);
-        jScrollPane2.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tagTable.setModel(model);
+        tagTable.setColumnSelectionAllowed(true);
+        jScrollPane2.setViewportView(tagTable);
+        tagTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tagTable.setCellSelectionEnabled(false);
+        tagTable.setRowSelectionAllowed(true);
 
         jPanel2.add(jScrollPane2, "card2");
 
@@ -87,7 +89,7 @@ public class TagManagerMenu extends javax.swing.JDialog {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        int rowIndex = jTable1.convertRowIndexToModel(jTable1.getSelectedRow());
+        int rowIndex = tagTable.convertRowIndexToModel(tagTable.getSelectedRow());
         model.removeRow(rowIndex);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
@@ -104,6 +106,6 @@ public class TagManagerMenu extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tagTable;
     // End of variables declaration//GEN-END:variables
 }
