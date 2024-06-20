@@ -203,12 +203,26 @@ public class MainFrame2 extends javax.swing.JFrame {
                 imagePreview.add(imgButton);
             }
         }
+        imagePreview.repaint();
+    }
+    private void showImageWithName(String name){
+        hideAllImages();
+        for (ImageButton imgButton : buttonList){
+            Image2 image2 = manager.getImage2(imgButton.getPath());
+            if (image2.getNameWithoutExtension().equals(name)){
+                imagePreview.add(imgButton);
+            }
+        }
+        imagePreview.repaint();
     }
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         if (!searchText.getText().isEmpty()) {
             if (searchCategory.getSelectedItem().equals("Tag")) {
                 String[] tags = searchText.getText().split("\\s+");
                 showImagesWithTags(tags);
+            }else if (searchCategory.getSelectedItem().equals("Name")){
+                String name = searchText.getText();
+                showImageWithName(name);
             }
         } else {
             displayAllImages();
