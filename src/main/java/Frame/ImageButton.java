@@ -18,7 +18,7 @@ public class ImageButton extends JButton {
         super(icon);
     }
 
-
+    
     public ImageButton(String path, String text) {
         super(text);
         this.path = path;

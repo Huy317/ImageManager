@@ -40,6 +40,9 @@ public class MainFrame2 extends javax.swing.JFrame {
     private JPanel imagePreview, properties;
     private Image2 selectedImage2;
     private ImageButton selectedButton;
+    private ArrayList<ImageButton> buttonList = new ArrayList<>();
+    private JPanel hideImage = new JPanel();
+
     //private Image selectedImage;
     /**
      * Creates new form MainFrame2
@@ -174,7 +177,9 @@ public class MainFrame2 extends javax.swing.JFrame {
     }//GEN-LAST:event_searchTextActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
+        if (!searchText.getText().isEmpty()) {
+
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void saveMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuButtonActionPerformed
@@ -205,10 +210,9 @@ public class MainFrame2 extends javax.swing.JFrame {
     }//GEN-LAST:event_importFolderMenuButtonActionPerformed
 
     private void editTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagButtonActionPerformed
-        // TODO add your handling code here:
         if (selectedImage2 != null) {
-            EditTagDialog edit = new EditTagDialog(this, true, selectedImage2);
 
+            //EditTagDialog edit = new EditTagDialog(this, true, selectedImage2);
         } else {
             JOptionPane.showMessageDialog(null, "Please select an image first", "Warning", JOptionPane.WARNING_MESSAGE);
         }
@@ -221,23 +225,36 @@ public class MainFrame2 extends javax.swing.JFrame {
         TagManagerMenu tagManagerMenu = new TagManagerMenu(this, rootPaneCheckingEnabled);
         tagManagerMenu.setLocationRelativeTo(this);
         tagManagerMenu.setVisible(true);
-        
+
     }//GEN-LAST:event_editTagActionPerformed
+    private void hideAllImages() {
+        for (ImageButton imgButton : buttonList) {
+            imagePreview.remove(imgButton);
+        }
+        imagePreview.repaint();
+    }
+
+    private void displayAllImages() {
+        hideAllImages();
+        for (ImageButton imgButton : buttonList) {
+            imagePreview.add(imgButton);
+        }
+        imagePreview.repaint();
+    }
 
     private void loadImages(String folderPath) {
         imagePanel.removeAll();
-        
+
         JPopupMenu popMenu = new JPopupMenu();
         JMenuItem option1 = new JMenuItem("Add tag");
         option1.setActionCommand("addTag");
         option1.addActionListener((e) -> {
-                TagPopupDialog popupDialog = new TagPopupDialog(this, rootPaneCheckingEnabled);
-                popupDialog.setLocationRelativeTo(this);
-                popupDialog.setVisible(true);
+            TagPopupDialog popupDialog = new TagPopupDialog(this, rootPaneCheckingEnabled);
+            popupDialog.setLocationRelativeTo(this);
+            popupDialog.setVisible(true);
         });
         popMenu.add(option1);
-        
-        
+
         File[] allFiles = manager.scanOneFolder(folderPath);
         imagePreview = new JPanel();
         imagePreview.setLayout(new GridLayout(0, 4));
@@ -254,8 +271,7 @@ public class MainFrame2 extends javax.swing.JFrame {
                 imgIcon = new ImageIcon(newimg);
                 imgButton.setIcon(imgIcon);
                 imgButton.addActionListener((e) -> {
-                    //System.out.println(imgButton.getPath());
-                    if (selectedButton != null){
+                    if (selectedButton != null) {
                         selectedButton.setBackground(Color.WHITE);
                         selectedButton.setOpaque(false);
                     }
@@ -264,28 +280,33 @@ public class MainFrame2 extends javax.swing.JFrame {
                     imgButton.setOpaque(true);
                     selectedImage2 = manager.getImage2(imgButton.getPath());
                 });
-                imgButton.addMouseListener(new MouseListener(){
+                imgButton.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                     }
+
                     @Override
                     public void mousePressed(MouseEvent e) {
                         if (SwingUtilities.isRightMouseButton(e)) {
                             popMenu.show(imgButton, e.getX(), e.getY());
                         }
                     }
+
                     @Override
                     public void mouseReleased(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseEntered(MouseEvent e) {
                     }
+
                     @Override
                     public void mouseExited(MouseEvent e) {
                     }
-                    
+
                 });
                 imagePreview.add(imgButton);
+                buttonList.add(imgButton);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -295,10 +316,11 @@ public class MainFrame2 extends javax.swing.JFrame {
         imagePreviewScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         imagePanel.add(imagePreviewScroll, BorderLayout.CENTER);
 
-        //hacky fix but it works, don't question
-        this.setSize(1281, 721);
-        this.setSize(1280, 720);
-        if (allFiles.length <= 4){
+        // no more hacky fix o7
+        imagePreview.repaint();
+        
+        // still need this because low number of images = smaller window
+        if (allFiles.length <= 4) {
             pack();
         }
     }
@@ -370,7 +392,6 @@ public class MainFrame2 extends javax.swing.JFrame {
             }
         });
     }
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
