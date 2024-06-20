@@ -95,6 +95,11 @@ public class MainFrame2 extends javax.swing.JFrame {
                 searchTextActionPerformed(evt);
             }
         });
+        searchText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchTextKeyReleased(evt);
+            }
+        });
         jPanel1.add(searchText);
 
         searchButton.setText("Search");
@@ -178,7 +183,20 @@ public class MainFrame2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
-        // TODO add your handling code here:
+        // ACtivate when user press enter
+        if (!buttonList.isEmpty()) {
+            if (!searchText.getText().isEmpty()) {
+                if (searchCategory.getSelectedItem().equals("Tag")) {
+                    String[] tags = searchText.getText().split("\\s+");
+                    showImagesWithTags(tags);
+                } else if (searchCategory.getSelectedItem().equals("Name")) {
+                    String name = searchText.getText();
+                    showImageWithName(name);
+                }
+            } else {
+                displayAllImages();
+            }
+        }
     }//GEN-LAST:event_searchTextActionPerformed
 
     private void hideAllImages() {
@@ -186,6 +204,7 @@ public class MainFrame2 extends javax.swing.JFrame {
             imagePreview.remove(imgButton);
         }
         imagePreview.repaint();
+        imagePreview.revalidate();
     }
 
     private void displayAllImages() {
@@ -194,6 +213,7 @@ public class MainFrame2 extends javax.swing.JFrame {
             imagePreview.add(imgButton);
         }
         imagePreview.repaint();
+        imagePreview.revalidate();
     }
 
     private void showImagesWithTags(String[] tags) {
@@ -205,6 +225,7 @@ public class MainFrame2 extends javax.swing.JFrame {
             }
         }
         imagePreview.repaint();
+        imagePreview.revalidate();
     }
 
     private void showImageWithName(String name) {
@@ -216,18 +237,32 @@ public class MainFrame2 extends javax.swing.JFrame {
             }
         }
         imagePreview.repaint();
+        imagePreview.revalidate();
+    }
+    private void showImagesMathchesName(String name){
+        hideAllImages();
+        for (ImageButton imgButton : buttonList) {
+            Image2 image2 = manager.getImage2(imgButton.getPath());
+            if (image2.getNameWithoutExtension().contains(name)) {
+                imagePreview.add(imgButton);
+            }
+        }
+        imagePreview.repaint();
+        imagePreview.revalidate();
     }
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        if (!searchText.getText().isEmpty()) {
-            if (searchCategory.getSelectedItem().equals("Tag")) {
-                String[] tags = searchText.getText().split("\\s+");
-                showImagesWithTags(tags);
-            } else if (searchCategory.getSelectedItem().equals("Name")) {
-                String name = searchText.getText();
-                showImageWithName(name);
+        if (!buttonList.isEmpty()) {
+            if (!searchText.getText().isEmpty()) {
+                if (searchCategory.getSelectedItem().equals("Tag")) {
+                    String[] tags = searchText.getText().split("\\s+");
+                    showImagesWithTags(tags);
+                } else if (searchCategory.getSelectedItem().equals("Name")) {
+                    String name = searchText.getText();
+                    showImageWithName(name);
+                }
+            } else {
+                displayAllImages();
             }
-        } else {
-            displayAllImages();
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -270,6 +305,17 @@ public class MainFrame2 extends javax.swing.JFrame {
         tagManagerMenu.setVisible(true);
 
     }//GEN-LAST:event_editTagActionPerformed
+
+    private void searchTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextKeyReleased
+        if (searchCategory.getSelectedItem().equals("Name")){
+            String name = searchText.getText();
+            if (!name.isEmpty()){
+                showImagesMathchesName(name);
+            }else{
+                displayAllImages();
+            }
+        }
+    }//GEN-LAST:event_searchTextKeyReleased
 
     private void updateTrack(int num) {
         TrackerLabel.setText(num + " Images");
