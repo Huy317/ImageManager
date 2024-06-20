@@ -89,7 +89,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         jPanel1.add(searchCategory);
 
         searchText.setColumns(25);
-        searchText.setToolTipText("You can enter multiple tags by using space");
+        searchText.setToolTipText("You can enter multiple tags by using space, leave blank to show all");
         searchText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchTextActionPerformed(evt);
@@ -180,15 +180,38 @@ public class MainFrame2 extends javax.swing.JFrame {
     private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTextActionPerformed
+    
+    private void hideAllImages() {
+        for (ImageButton imgButton : buttonList) {
+            imagePreview.remove(imgButton);
+        }
+        imagePreview.repaint();
+    }
 
+    private void displayAllImages() {
+        hideAllImages();
+        for (ImageButton imgButton : buttonList) {
+            imagePreview.add(imgButton);
+        }
+        imagePreview.repaint();
+    }
+    private void showImagesWithTags(String[] tags){
+        hideAllImages();
+        for (ImageButton imgButton : buttonList){
+            Image2 image2 = manager.getImage2(imgButton.getPath());
+            if (image2.hasTag(tags)){
+                imagePreview.add(imgButton);
+            }
+        }
+    }
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         if (!searchText.getText().isEmpty()) {
-            if (searchCategory.getSelectedItem().equals("Tag")){
+            if (searchCategory.getSelectedItem().equals("Tag")) {
                 String[] tags = searchText.getText().split("\\s+");
-                for (String s : tags){
-                    System.out.println(s);
-                }
+                showImagesWithTags(tags);
             }
+        } else {
+            displayAllImages();
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -237,30 +260,17 @@ public class MainFrame2 extends javax.swing.JFrame {
         tagManagerMenu.setVisible(true);
 
     }//GEN-LAST:event_editTagActionPerformed
-    private void hideAllImages() {
-        for (ImageButton imgButton : buttonList) {
-            imagePreview.remove(imgButton);
-        }
-        imagePreview.repaint();
+
+    private void updateTrack(int num) {
+        TrackerLabel.setText(num + " Images");
     }
 
-    private void displayAllImages() {
-        hideAllImages();
-        for (ImageButton imgButton : buttonList) {
-            imagePreview.add(imgButton);
-        }
-        imagePreview.repaint();
-    }
-    
-    private void updateTrack(int num){
-        TrackerLabel.setText(num+" Images");
-    }
     private void loadImages(String folderPath) {
         imagePanel.removeAll();
         buttonList.clear();
         selectedButton = null;
         selectedImage2 = null;
-        
+
         JPopupMenu popMenu = new JPopupMenu();
         JMenuItem option1 = new JMenuItem("Add tag");
         option1.setActionCommand("addTag");
@@ -333,7 +343,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         imagePanel.add(imagePreviewScroll, BorderLayout.CENTER);
 
         // hacky fix is still better
-        this.setSize(1280,720);
+        this.setSize(1280, 720);
         if (allFiles.length <= 4) {
             pack();
         }

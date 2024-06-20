@@ -70,6 +70,14 @@ public class Image2 implements Serializable {
         Tag tagToCheck = tagManager.getTag(tag);
         return tags.contains(tagToCheck);
     }
+    public boolean hasTag(String[] tags){
+        for (String tag : tags){
+            if (!hasTag(tag)){
+                return false;
+            }
+        }
+        return true;
+    }
     public boolean addTag(Tag tag) {
         if (hasTag(tag)) {
             return false;
