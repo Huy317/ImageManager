@@ -257,7 +257,8 @@ public class MainFrame2 extends javax.swing.JFrame {
         imagePreview.repaint();
         imagePreview.revalidate();
     }
-    private void showImagesMathchesName(String name){
+
+    private void showImagesMathchesName(String name) {
         hideAllImages();
         for (ImageButton imgButton : buttonList) {
             Image2 image2 = manager.getImage2(imgButton.getPath());
@@ -317,11 +318,11 @@ public class MainFrame2 extends javax.swing.JFrame {
     }//GEN-LAST:event_editTagActionPerformed
 
     private void searchTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTextKeyReleased
-        if (searchCategory.getSelectedItem().equals("Name")){
+        if (searchCategory.getSelectedItem().equals("Name")) {
             String name = searchText.getText();
-            if (!name.isEmpty()){
+            if (!name.isEmpty()) {
                 showImagesMathchesName(name);
-            }else{
+            } else {
                 displayAllImages();
             }
         }
@@ -334,24 +335,34 @@ public class MainFrame2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select an image first", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_editTagButtonActionPerformed
-    
+
     private void updateTrack(int num) {
         TrackerLabel.setText(num + " Images");
     }
-    private void displayTagsInArea(){
+
+    private void displayTagsInArea() {
         tagsArea.setText("");
         StringBuilder sb = new StringBuilder();
-        if (selectedImage2 != null){
+        if (selectedImage2 != null) {
             Tag[] tags = selectedImage2.getTagsArray();
-            for (Tag tag : tags){
+            for (Tag tag : tags) {
                 sb.append(tag.getName()).append("\n");
             }
             tagsArea.setText(sb.toString());
         }
     }
+
+    public void deselectImageButton() {
+        if (selectedButton != null) {
+            selectedButton.setBackground(Color.WHITE);
+            selectedButton.setOpaque(false);
+        }
+    }
+
     private void loadImages(String folderPath) {
         imagePanel.removeAll();
         buttonList.clear();
+        deselectImageButton();
         selectedButton = null;
         selectedImage2 = null;
 
@@ -381,10 +392,7 @@ public class MainFrame2 extends javax.swing.JFrame {
                 imgIcon = new ImageIcon(newimg);
                 imgButton.setIcon(imgIcon);
                 imgButton.addActionListener((e) -> {
-                    if (selectedButton != null) {
-                        selectedButton.setBackground(Color.WHITE);
-                        selectedButton.setOpaque(false);
-                    }
+                    deselectImageButton();
                     selectedButton = imgButton;
                     imgButton.setBackground(Color.LIGHT_GRAY);
                     imgButton.setOpaque(true);

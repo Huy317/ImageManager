@@ -127,9 +127,8 @@ public class Manager {
                     if (!file.isDirectory()) {
                         String fileName = file.getName().toLowerCase();
                         if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".png") || fileName.endsWith(".gif")) {
-                            if (this.add(file.getAbsolutePath())) {
-                                filesReturn.add(file);
-                            }
+                            this.add(file.getAbsolutePath());
+                            filesReturn.add(file);
                         }
                     }
                 }
