@@ -265,7 +265,7 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     private void editTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagActionPerformed
         // TODO add your handling code here:
-        TagManagerMenu tagManagerMenu = new TagManagerMenu(this, rootPaneCheckingEnabled);
+        TagManagerMenu tagManagerMenu = new TagManagerMenu(this, true, tagManager);
         tagManagerMenu.setLocationRelativeTo(this);
         tagManagerMenu.setVisible(true);
 
