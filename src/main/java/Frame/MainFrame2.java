@@ -63,6 +63,7 @@ public class MainFrame2 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        TrackerLabel = new javax.swing.JLabel();
         searchCategory = new javax.swing.JComboBox<>();
         searchText = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
@@ -81,10 +82,14 @@ public class MainFrame2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        searchCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name", "Tag" }));
+        TrackerLabel.setText("0 Images");
+        jPanel1.add(TrackerLabel);
+
+        searchCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tag", "Name" }));
         jPanel1.add(searchCategory);
 
-        searchText.setColumns(10);
+        searchText.setColumns(25);
+        searchText.setToolTipText("You can enter multiple tags by using space");
         searchText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchTextActionPerformed(evt);
@@ -178,7 +183,12 @@ public class MainFrame2 extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         if (!searchText.getText().isEmpty()) {
-
+            if (searchCategory.getSelectedItem().equals("Tag")){
+                String[] tags = searchText.getText().split("\\s+");
+                for (String s : tags){
+                    System.out.println(s);
+                }
+            }
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -241,10 +251,16 @@ public class MainFrame2 extends javax.swing.JFrame {
         }
         imagePreview.repaint();
     }
-
+    
+    private void updateTrack(int num){
+        TrackerLabel.setText(num+" Images");
+    }
     private void loadImages(String folderPath) {
         imagePanel.removeAll();
-
+        buttonList.clear();
+        selectedButton = null;
+        selectedImage2 = null;
+        
         JPopupMenu popMenu = new JPopupMenu();
         JMenuItem option1 = new JMenuItem("Add tag");
         option1.setActionCommand("addTag");
@@ -316,13 +332,12 @@ public class MainFrame2 extends javax.swing.JFrame {
         imagePreviewScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         imagePanel.add(imagePreviewScroll, BorderLayout.CENTER);
 
-        // no more hacky fix o7
-        imagePreview.repaint();
-        
-        // still need this because low number of images = smaller window
+        // hacky fix is still better
+        this.setSize(1280,720);
         if (allFiles.length <= 4) {
             pack();
         }
+        updateTrack(allFiles.length);
     }
 
     public void cleanUp() {
@@ -395,6 +410,7 @@ public class MainFrame2 extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TrackerLabel;
     private javax.swing.JMenuItem editTag;
     private javax.swing.JButton editTagButton;
     private javax.swing.JMenuItem exitMenuButton;

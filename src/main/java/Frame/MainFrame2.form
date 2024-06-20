@@ -92,12 +92,17 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
       <SubComponents>
+        <Component class="javax.swing.JLabel" name="TrackerLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0 Images"/>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JComboBox" name="searchCategory">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Name"/>
-                <StringItem index="1" value="Tag"/>
+                <StringItem index="0" value="Tag"/>
+                <StringItem index="1" value="Name"/>
               </StringArray>
             </Property>
           </Properties>
@@ -107,7 +112,8 @@
         </Component>
         <Component class="javax.swing.JTextField" name="searchText">
           <Properties>
-            <Property name="columns" type="int" value="10"/>
+            <Property name="columns" type="int" value="25"/>
+            <Property name="toolTipText" type="java.lang.String" value="You can enter multiple tags by using space"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchTextActionPerformed"/>
