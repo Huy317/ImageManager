@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
  * @author ADMIN
  */
 public class TagManagerMenu extends javax.swing.JDialog {
-    private TagManager tagManager;
-    private TagTableModel model = new TagTableModel(tagManager.getTagList());
+    private TagManager tagManager = TagManager.getInstance();
+    private TagTableModel model = new TagTableModel(tagManager.getMap());
 
     /**
      * Creates new form TagManagerMenu
@@ -55,6 +55,11 @@ public class TagManagerMenu extends javax.swing.JDialog {
         jPanel1.add(addButton);
 
         deleteButton.setText("Delete Tag");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(deleteButton);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -77,7 +82,14 @@ public class TagManagerMenu extends javax.swing.JDialog {
         // TODO add your handling code here:
         Tag newTag = new Tag(JOptionPane.showInputDialog("Add new tag:"));
         tagManager.add(newTag);
+        refresh();
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        int rowIndex = jTable1.convertRowIndexToModel(jTable1.getSelectedRow());
+        model.removeRow(rowIndex);
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     public void refresh(){
         model.fireTableDataChanged();

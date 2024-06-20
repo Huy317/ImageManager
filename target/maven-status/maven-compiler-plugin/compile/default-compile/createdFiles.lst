@@ -1,4 +1,5 @@
 Frame\EditTagDialog$3.class
+Frame\MainFrame2$8.class
 Frame\ImageButton.class
 Frame\MainFrame2$1.class
 Frame\TagManagerMenu.class
@@ -9,10 +10,12 @@ Frame\MainFrame2$6.class
 imagemanager\TagManager.class
 Frame\TagManagerMenu$1.class
 Frame\MainFrame2$5.class
+Frame\MainFrame2.class
 Frame\EditTagDialog.class
 Frame\EditTagDialog$2.class
 Frame\EditTagDialog$3$1.class
 Frame\MainFrame2$7.class
+Frame\TagManagerMenu$2.class
 Frame\TagPopupDialog.class
 Frame\TagPopupDialog$CheckboxListCellRenderer.class
 imagemanager\Image2.class
@@ -22,3 +25,4 @@ imagemanager\Tag.class
 Frame\EditTagDialog$1.class
 imagemanager\Manager.class
 Frame\TagTableModel.class
+Frame\MainFrame2$9.class

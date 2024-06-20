@@ -42,6 +42,12 @@ public class TagManager {
         return map.get(name);
     }
 
+    public HashMap<String, Tag> getMap() {
+        return map;
+    }
+    
+    
+
     public ArrayList<Tag> getTagList() {
         return new ArrayList<>(map.values());
     }

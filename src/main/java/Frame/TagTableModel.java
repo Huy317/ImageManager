@@ -7,23 +7,62 @@ package Frame;
 import imagemanager.Tag;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ADMIN
  */
-public class TagTableModel extends DefaultTableModel{
-    DefaultTableModel model = new DefaultTableModel(new Object[] { "Key", "Value" }, 0);
-    ArrayList<Tag> tagList;
+public class TagTableModel extends AbstractTableModel{
+    private final String[] colName = {"Usage" , "Name"};
+    private HashMap<String, Tag> tagMap;
+    private List<Tag> tagList;
 
-    public TagTableModel(ArrayList<Tag> tagMap) {
-        this.tagList = tagList;
+    public TagTableModel(HashMap<String, Tag> tagMap) {
+        this.tagMap = tagMap;
     }
     
-    public void addToModel(){
-        for (Tag tag : tagList) {
-            model.addRow(new Object[] {tag.getCount(), tag.getName()});
+    @Override
+    public int getRowCount() {
+        return tagMap.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return colName.length;
+    }
+    
+    @Override
+    public String getColumnName(int col){
+        return colName[col];
+    }
+    
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        tagList = new ArrayList<>(tagMap.values());
+        Tag tag = tagList.get(rowIndex);
+        switch (columnIndex) {
+            case 0 -> {
+                return tag.getCount();
+            }
+            case 1 -> {
+                return tag.getName();
+            }
+            default -> {
+                return null;
+            }
         }
     }
+    
+    public void removeRow(int rowIndex){
+        if (tagList.remove(tagList.get(rowIndex))){
+            fireTableRowsDeleted(rowIndex,rowIndex);
+            tagMap.remove(tagList.get(rowIndex).getName());
+        }
+    }
+    
+   
 }
