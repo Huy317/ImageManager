@@ -6,6 +6,7 @@ package Frame;
 
 import imagemanager.Image2;
 import imagemanager.Manager;
+import imagemanager.Tag;
 import imagemanager.TagManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -62,6 +63,7 @@ public class MainFrame2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        editTagButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         TrackerLabel = new javax.swing.JLabel();
         searchCategory = new javax.swing.JComboBox<>();
@@ -70,7 +72,9 @@ public class MainFrame2 extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         imagePanel = new javax.swing.JPanel();
         propertiesPanel = new javax.swing.JPanel();
-        editTagButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tagsArea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         saveMenuButton = new javax.swing.JMenuItem();
@@ -79,6 +83,13 @@ public class MainFrame2 extends javax.swing.JFrame {
         importFolderMenuButton = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         editTag = new javax.swing.JMenuItem();
+
+        editTagButton.setText("Edit Tags");
+        editTagButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTagButtonActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,14 +131,21 @@ public class MainFrame2 extends javax.swing.JFrame {
 
         propertiesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Properties"));
         propertiesPanel.setPreferredSize(new java.awt.Dimension(130, 304));
+        propertiesPanel.setLayout(new java.awt.BorderLayout());
 
-        editTagButton.setText("Edit Tags");
-        editTagButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editTagButtonActionPerformed(evt);
-            }
-        });
-        propertiesPanel.add(editTagButton);
+        jLabel1.setText("Tags:");
+        propertiesPanel.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        tagsArea.setEditable(false);
+        tagsArea.setBackground(new java.awt.Color(242, 242, 242));
+        tagsArea.setColumns(10);
+        tagsArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tagsArea.setRows(10);
+        jScrollPane1.setViewportView(tagsArea);
+
+        propertiesPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         mainPanel.add(propertiesPanel, java.awt.BorderLayout.LINE_END);
 
@@ -290,14 +308,6 @@ public class MainFrame2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_importFolderMenuButtonActionPerformed
 
-    private void editTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagButtonActionPerformed
-        if (selectedImage2 != null) {
-            //EditTagDialog edit = new EditTagDialog(this, true, selectedImage2);
-        } else {
-            JOptionPane.showMessageDialog(null, "Please select an image first", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_editTagButtonActionPerformed
-
     private void editTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagActionPerformed
         // TODO add your handling code here:
         TagManagerMenu tagManagerMenu = new TagManagerMenu(this, true, tagManager);
@@ -317,10 +327,28 @@ public class MainFrame2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_searchTextKeyReleased
 
+    private void editTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagButtonActionPerformed
+        if (selectedImage2 != null) {
+            //EditTagDialog edit = new EditTagDialog(this, true, selectedImage2);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select an image first", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_editTagButtonActionPerformed
+    
     private void updateTrack(int num) {
         TrackerLabel.setText(num + " Images");
     }
-
+    private void displayTagsInArea(){
+        tagsArea.setText("");
+        StringBuilder sb = new StringBuilder();
+        if (selectedImage2 != null){
+            Tag[] tags = selectedImage2.getTagsArray();
+            for (Tag tag : tags){
+                sb.append(tag.getName()).append("\n");
+            }
+            tagsArea.setText(sb.toString());
+        }
+    }
     private void loadImages(String folderPath) {
         imagePanel.removeAll();
         buttonList.clear();
@@ -361,6 +389,7 @@ public class MainFrame2 extends javax.swing.JFrame {
                     imgButton.setBackground(Color.LIGHT_GRAY);
                     imgButton.setOpaque(true);
                     selectedImage2 = manager.getImage2(imgButton.getPath());
+                    displayTagsInArea();
                 });
                 imgButton.addMouseListener(new MouseListener() {
                     @Override
@@ -482,16 +511,19 @@ public class MainFrame2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuButton;
     private javax.swing.JPanel imagePanel;
     private javax.swing.JMenuItem importFolderMenuButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel propertiesPanel;
     private javax.swing.JMenuItem saveMenuButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox<String> searchCategory;
     private javax.swing.JTextField searchText;
+    private javax.swing.JTextArea tagsArea;
     // End of variables declaration//GEN-END:variables
 }
