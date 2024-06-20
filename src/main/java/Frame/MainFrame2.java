@@ -370,9 +370,12 @@ public class MainFrame2 extends javax.swing.JFrame {
         JMenuItem option1 = new JMenuItem("Add tag");
         option1.setActionCommand("addTag");
         option1.addActionListener((e) -> {
-            TagPopupDialog popupDialog = new TagPopupDialog(this, rootPaneCheckingEnabled);
-            popupDialog.setLocationRelativeTo(this);
-            popupDialog.setVisible(true);
+//            TagPopupDialog popupDialog = new TagPopupDialog(this, rootPaneCheckingEnabled);
+//            popupDialog.setLocationRelativeTo(this);
+//            popupDialog.setVisible(true);
+              TagPopupDialog2 popupDialog2 = new TagPopupDialog2(this, rootPaneCheckingEnabled, selectedImage2);
+              popupDialog2.setLocationRelativeTo(this);
+              popupDialog2.setVisible(true);
         });
         popMenu.add(option1);
 
