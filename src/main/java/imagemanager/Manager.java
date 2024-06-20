@@ -7,10 +7,9 @@ package imagemanager;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-//TODO: implement add tags to images
-//TODO: implement search functions
 
 public class Manager {
+
     public static String DEFAULT_SAVING_PATH = "image.data";
     private static Manager instance;
     private final HashMap<String, Image2> map = new HashMap<>();
@@ -36,13 +35,13 @@ public class Manager {
         }
         return false;
     }
-    
+
     private boolean add(String path) {
         Image2 im = new Image2(path);
         return this.add(im);
     }
-    
-    public Image2 getImage2(String path){
+
+    public Image2 getImage2(String path) {
         return map.get(path);
     }
 //    public boolean addTag(Image image, Tag tag) {
@@ -60,8 +59,7 @@ public class Manager {
 //        }
 //        return false; // image doesn't exist
 //    }
-    
-    
+
     public boolean hasImage(Image2 im) {
         if (im == null) {
             return false;
@@ -72,12 +70,12 @@ public class Manager {
         }
         return false;
     }
-    
-    public boolean hasImage(String path){
+
+    public boolean hasImage(String path) {
         Image2 im = new Image2(path);
         return this.hasImage(im);
     }
-    
+
     public String[] getImagePath() {
         return map.keySet().toArray(new String[0]);
     }
@@ -86,7 +84,7 @@ public class Manager {
      * Scan for ALL images inside a folder/subfolders uses Recrusions
      *
      * @param path the path/url to the folder
-     * 
+     *
      * @return File[] containing all images in folder
      */
     public File[] scanAll(String path) {
@@ -116,7 +114,7 @@ public class Manager {
      * Scan for images in selected folder ONLY Does not use recursion
      *
      * @param path the path/url to the folder
-     * 
+     *
      * @return File[] containing all images in folder
      */
     public File[] scanOneFolder(String path) {
@@ -172,10 +170,11 @@ public class Manager {
             System.out.println(e.getMessage());
         }
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (String k : map.keySet()){
+        for (String k : map.keySet()) {
             sb.append(k).append(" path: ").append(map.get(k).getPath()).append("\n");
         }
         return sb.toString();

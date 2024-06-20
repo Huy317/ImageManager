@@ -180,7 +180,7 @@ public class MainFrame2 extends javax.swing.JFrame {
     private void searchTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTextActionPerformed
-    
+
     private void hideAllImages() {
         for (ImageButton imgButton : buttonList) {
             imagePreview.remove(imgButton);
@@ -195,21 +195,23 @@ public class MainFrame2 extends javax.swing.JFrame {
         }
         imagePreview.repaint();
     }
-    private void showImagesWithTags(String[] tags){
+
+    private void showImagesWithTags(String[] tags) {
         hideAllImages();
-        for (ImageButton imgButton : buttonList){
+        for (ImageButton imgButton : buttonList) {
             Image2 image2 = manager.getImage2(imgButton.getPath());
-            if (image2.hasTag(tags)){
+            if (image2.hasTag(tags)) {
                 imagePreview.add(imgButton);
             }
         }
         imagePreview.repaint();
     }
-    private void showImageWithName(String name){
+
+    private void showImageWithName(String name) {
         hideAllImages();
-        for (ImageButton imgButton : buttonList){
+        for (ImageButton imgButton : buttonList) {
             Image2 image2 = manager.getImage2(imgButton.getPath());
-            if (image2.getNameWithoutExtension().equals(name)){
+            if (image2.getNameWithoutExtension().equals(name)) {
                 imagePreview.add(imgButton);
             }
         }
@@ -220,7 +222,7 @@ public class MainFrame2 extends javax.swing.JFrame {
             if (searchCategory.getSelectedItem().equals("Tag")) {
                 String[] tags = searchText.getText().split("\\s+");
                 showImagesWithTags(tags);
-            }else if (searchCategory.getSelectedItem().equals("Name")){
+            } else if (searchCategory.getSelectedItem().equals("Name")) {
                 String name = searchText.getText();
                 showImageWithName(name);
             }
@@ -249,22 +251,16 @@ public class MainFrame2 extends javax.swing.JFrame {
         fileChooser.setMultiSelectionEnabled(false);
         int x = fileChooser.showDialog(this, "Open");
         if (x == JFileChooser.APPROVE_OPTION) {
-
             loadImages(fileChooser.getSelectedFile().toString());
-            //setVisible(true);
-
         }
     }//GEN-LAST:event_importFolderMenuButtonActionPerformed
 
     private void editTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagButtonActionPerformed
         if (selectedImage2 != null) {
-
             //EditTagDialog edit = new EditTagDialog(this, true, selectedImage2);
         } else {
             JOptionPane.showMessageDialog(null, "Please select an image first", "Warning", JOptionPane.WARNING_MESSAGE);
         }
-
-
     }//GEN-LAST:event_editTagButtonActionPerformed
 
     private void editTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagActionPerformed

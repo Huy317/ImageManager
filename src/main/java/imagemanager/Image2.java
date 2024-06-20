@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @author Huy
  */
 public class Image2 implements Serializable {
+
     private String path;
     private final ArrayList<Tag> tags = new ArrayList<>();
     private final TagManager tagManager = TagManager.getInstance();
@@ -66,18 +67,21 @@ public class Image2 implements Serializable {
     public boolean hasTag(Tag tag) {
         return tags.contains(tag);
     }
+
     public boolean hasTag(String tag) {
         Tag tagToCheck = tagManager.getTag(tag);
         return tags.contains(tagToCheck);
     }
-    public boolean hasTag(String[] tags){
-        for (String tag : tags){
-            if (!hasTag(tag)){
+
+    public boolean hasTag(String[] tags) {
+        for (String tag : tags) {
+            if (!hasTag(tag)) {
                 return false;
             }
         }
         return true;
     }
+
     public boolean addTag(Tag tag) {
         if (hasTag(tag)) {
             return false;
@@ -95,12 +99,12 @@ public class Image2 implements Serializable {
             addTag(tag);
         }
     }
-    public boolean removeTag(Tag tag){
-        if (tags.remove(tag)){
+
+    public boolean removeTag(Tag tag) {
+        if (tags.remove(tag)) {
             tag.decrementCount();
             return true;
         }
         return false;
     }
 }
-

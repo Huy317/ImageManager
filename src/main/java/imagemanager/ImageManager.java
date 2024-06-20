@@ -16,11 +16,8 @@ public class ImageManager {
         Manager manager = Manager.getInstance();
         TagManager tagManager = TagManager.getInstance();
 
-        
         MainFrame2 frame = new MainFrame2();
         frame.setVisible(true);
-
-        
 
     }
 }

@@ -9,8 +9,9 @@ package imagemanager;
  * @author GIA HUY
  */
 public class Tag {
+
     private final String name;
-    private int count; // number of images that have this tag
+    private int count; // number of images that have this tag (unused now cuz lazy, might add a feature for this, idk)
 
     public Tag(String name) {
         this.name = name;
@@ -37,9 +38,8 @@ public class Tag {
         this.count--;
     }
 
-    public boolean equals(Tag otherTag){
+    public boolean equals(Tag otherTag) {
         return name.equals(otherTag.getName());
     }
-          
-}
 
+}
