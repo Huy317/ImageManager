@@ -19,6 +19,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -354,6 +359,18 @@ public class MainFrame2 extends javax.swing.JFrame {
             for (Tag tag : tags) {
                 sb.append(tag.getName()).append("\n");
             }
+            
+//            sb.append("==========\n");
+//            Path path = Paths.get(selectedImage2.getPath());
+//            try{
+//                BasicFileAttributes attributes = Files.readAttributes(path,BasicFileAttributes.class);
+//                sb.append("Creation time: ").append(attributes.creationTime());
+//            }catch(IOException e){
+//                System.out.println("BasicAttributesError:"+e.getMessage());
+//            }
+            
+            
+            
             tagsArea.setText(sb.toString());
         }
     }
