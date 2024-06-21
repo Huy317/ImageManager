@@ -4,11 +4,13 @@
  */
 package imagemanager;
 
+import java.io.Serializable;
+
 /**
  *
  * @author GIA HUY
  */
-public class Tag {
+public class Tag implements Serializable {
 
     private final String name;
     private int count; // number of images that have this tag (unused now cuz lazy, might add a feature for this, idk)

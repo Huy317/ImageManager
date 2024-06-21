@@ -139,7 +139,6 @@ public class MainFrame2 extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         tagsArea.setEditable(false);
-        tagsArea.setBackground(new java.awt.Color(242, 242, 242));
         tagsArea.setColumns(10);
         tagsArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tagsArea.setRows(10);
@@ -233,12 +232,19 @@ public class MainFrame2 extends javax.swing.JFrame {
         imagePreview.repaint();
         imagePreview.revalidate();
     }
-
+    private boolean hasTags(Image2 image2, String[] tags) {
+        for (String tag : tags) {
+            if (!image2.hasTag(tagManager.getTag(tag))){
+                return false;
+            }
+        }
+        return true;
+    }
     private void showImagesWithTags(String[] tags) {
         hideAllImages();
         for (ImageButton imgButton : buttonList) {
             Image2 image2 = manager.getImage2(imgButton.getPath());
-            if (image2.hasTag(tags)) {
+            if (hasTags(image2, tags)) {
                 imagePreview.add(imgButton);
             }
         }

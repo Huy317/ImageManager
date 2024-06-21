@@ -37,7 +37,7 @@ public class TagPopupDialog2 extends javax.swing.JDialog {
 
     private void loadTags(Image2 image2) {
         checkboxList.clear();
-        for (Tag tag : tagManager.getTagList()) {
+        for (Tag tag : tagManager.getMap().values()) {
             JCheckBox checkbox = new JCheckBox(tag.getName());
             if (image2.hasTag(tag)) {
                 checkbox.setSelected(true);
