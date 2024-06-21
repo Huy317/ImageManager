@@ -57,6 +57,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         initComponents();
         setSize(1280, 720);
         setLocationRelativeTo(null);
+        setTitle("Image Manager");
     }
 
     /**
@@ -144,9 +145,11 @@ public class MainFrame2 extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         tagsArea.setEditable(false);
+        tagsArea.setBackground(new java.awt.Color(255, 255, 255));
         tagsArea.setColumns(10);
         tagsArea.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tagsArea.setRows(10);
+        tagsArea.setRows(8);
+        tagsArea.setOpaque(false);
         jScrollPane1.setViewportView(tagsArea);
 
         propertiesPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);

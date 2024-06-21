@@ -10,6 +10,7 @@ import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 
@@ -33,6 +34,9 @@ public class TagPopupDialog2 extends javax.swing.JDialog {
         selectedImage2 = image2;
         loadTags(image2);
         pack();
+        if (checkboxList.isEmpty()){
+            JOptionPane.showMessageDialog(null,"There seem to be no tag to load, create tag using the [Tag menu] button","Image Manager[Edit tag]",JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     private void loadTags(Image2 image2) {
