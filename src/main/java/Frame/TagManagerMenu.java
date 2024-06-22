@@ -81,7 +81,7 @@ public class TagManagerMenu extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
+
         Tag newTag = new Tag(JOptionPane.showInputDialog("Add new tag:"));
         if (tagManager.add(newTag) == false){
             JOptionPane.showMessageDialog(null, "Tag already exist","Warning",JOptionPane.WARNING_MESSAGE);
@@ -90,7 +90,7 @@ public class TagManagerMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+
         int rowIndex = tagTable.convertRowIndexToModel(tagTable.getSelectedRow());
         model.removeRow(rowIndex);
     }//GEN-LAST:event_deleteButtonActionPerformed

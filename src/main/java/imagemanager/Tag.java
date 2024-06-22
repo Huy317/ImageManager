@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class Tag implements Serializable {
 
     private final String name;
-    private int count; // number of images that have this tag (unused now cuz lazy, might add a feature for this, idk)
+    private int count; // number of images that have this tag
 
     public Tag(String name) {
         this.name = name;

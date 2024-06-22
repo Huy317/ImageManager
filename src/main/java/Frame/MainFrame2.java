@@ -72,7 +72,6 @@ public class MainFrame2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        editTagButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         TrackerLabel = new javax.swing.JLabel();
         searchCategory = new javax.swing.JComboBox<>();
@@ -97,13 +96,6 @@ public class MainFrame2 extends javax.swing.JFrame {
         importFolderMenuButton = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         editTag = new javax.swing.JMenuItem();
-
-        editTagButton.setText("Edit Tags");
-        editTagButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editTagButtonActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -336,18 +328,18 @@ public class MainFrame2 extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void saveMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuButtonActionPerformed
-        // TODO add your handling code here:
+
         tagManager.writeTo(TagManager.DEFAULT_SAVING_PATH);
         manager.writeTo(Manager.DEFAULT_SAVING_PATH);
     }//GEN-LAST:event_saveMenuButtonActionPerformed
 
     private void exitMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuButtonActionPerformed
-        // TODO add your handling code here:
+
         System.exit(0);
     }//GEN-LAST:event_exitMenuButtonActionPerformed
 
     private void importFolderMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFolderMenuButtonActionPerformed
-        // TODO add your handling code here:
+
         //jScrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         //jScrollPane3.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         JFileChooser fileChooser = new JFileChooser(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Pictures"));
@@ -360,7 +352,7 @@ public class MainFrame2 extends javax.swing.JFrame {
     }//GEN-LAST:event_importFolderMenuButtonActionPerformed
 
     private void editTagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagActionPerformed
-        // TODO add your handling code here:
+
         TagManagerMenu tagManagerMenu = new TagManagerMenu(this, true, tagManager);
         tagManagerMenu.setLocationRelativeTo(this);
         tagManagerMenu.setVisible(true);
@@ -377,14 +369,6 @@ public class MainFrame2 extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_searchTextKeyReleased
-
-    private void editTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTagButtonActionPerformed
-        if (selectedImage2 != null) {
-            //EditTagDialog edit = new EditTagDialog(this, true, selectedImage2);
-        } else {
-            JOptionPane.showMessageDialog(null, "Please select an image first", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_editTagButtonActionPerformed
 
     private void updateTrack(int num) {
         TrackerLabel.setText(num + " Images");
@@ -422,25 +406,25 @@ public class MainFrame2 extends javax.swing.JFrame {
     }
 
     private void loadImages(String folderPath) {
+        // clean up old resources
         imagePanel.removeAll();
         buttonList.clear();
         deselectImageButton();
         selectedButton = null;
         selectedImage2 = null;
-
+        
+        // setting up right click popup menu
         JPopupMenu popMenu = new JPopupMenu();
         JMenuItem option1 = new JMenuItem("Add tag");
         option1.setActionCommand("addTag");
         option1.addActionListener((e) -> {
-//            TagPopupDialog popupDialog = new TagPopupDialog(this, rootPaneCheckingEnabled);
-//            popupDialog.setLocationRelativeTo(this);
-//            popupDialog.setVisible(true);
               TagPopupDialog2 popupDialog2 = new TagPopupDialog2(this, rootPaneCheckingEnabled, selectedImage2);
               popupDialog2.setLocationRelativeTo(this);
               popupDialog2.setVisible(true);
         });
         popMenu.add(option1);
 
+        // setting up panel
         File[] allFiles = manager.scanOneFolder(folderPath);
         imagePreview = new JPanel();
         imagePreview.setLayout(new GridLayout(0, 4));
@@ -456,6 +440,7 @@ public class MainFrame2 extends javax.swing.JFrame {
                 Image newimg = image.getScaledInstance(scaled.width, scaled.height, java.awt.Image.SCALE_SMOOTH);
                 imgIcon = new ImageIcon(newimg);
                 imgButton.setIcon(imgIcon);
+                // handling clicks
                 imgButton.addActionListener((e) -> {
                     deselectImageButton();
                     selectedButton = imgButton;
@@ -464,6 +449,7 @@ public class MainFrame2 extends javax.swing.JFrame {
                     selectedImage2 = manager.getImage2(imgButton.getPath());
                     displayTagsInArea();
                 });
+                // right click event
                 imgButton.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -489,28 +475,30 @@ public class MainFrame2 extends javax.swing.JFrame {
                     }
 
                 });
+                // adding button to list/panel
                 imagePreview.add(imgButton);
                 buttonList.add(imgButton);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
+        // scroll pane config
         imagePreviewScroll = new JScrollPane(imagePreview);
         imagePreviewScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         imagePreviewScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         imagePanel.add(imagePreviewScroll, BorderLayout.CENTER);
 
-        // hacky fix is still better
+        // make sure the window size is right
         this.setSize(1280, 720);
         if (allFiles.length <= 4) {
             pack();
         }
+        // display how many images loaded
         updateTrack(allFiles.length);
     }
 
     public void cleanUp() {
         imagePanel.removeAll();
-
     }
 
     private Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {
@@ -580,7 +568,6 @@ public class MainFrame2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TrackerLabel;
     private javax.swing.JMenuItem editTag;
-    private javax.swing.JButton editTagButton;
     private javax.swing.JMenuItem exitMenuButton;
     private javax.swing.JPanel imagePanel;
     private javax.swing.JMenuItem importFolderMenuButton;

@@ -81,7 +81,7 @@ public class Manager {
     }
 
     /**
-     * Scan for ALL images inside a folder/subfolders uses Recrusions
+     * Scan for ALL images inside a folder/subfolders uses Recursions
      *
      * @param path the path/url to the folder
      *
