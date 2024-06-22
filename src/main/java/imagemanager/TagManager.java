@@ -31,7 +31,7 @@ public class TagManager {
     }
 
     public boolean add(Tag tag) {
-        return map.putIfAbsent(tag.getName(), tag) != null;
+        return map.putIfAbsent(tag.getName(), tag) == null;
     }
 
     public void remove(Tag tag) {

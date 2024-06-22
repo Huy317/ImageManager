@@ -83,7 +83,9 @@ public class TagManagerMenu extends javax.swing.JDialog {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
         Tag newTag = new Tag(JOptionPane.showInputDialog("Add new tag:"));
-        tagManager.add(newTag);
+        if (tagManager.add(newTag) == false){
+            JOptionPane.showMessageDialog(null, "Tag already exist","Warning",JOptionPane.WARNING_MESSAGE);
+        }
         refresh();
     }//GEN-LAST:event_addButtonActionPerformed
 
