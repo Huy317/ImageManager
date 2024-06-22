@@ -398,7 +398,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         }
     }
 
-    public void deselectImageButton() {
+    private void deselectImageButton() {
         if (selectedButton != null) {
             selectedButton.setBackground(Color.WHITE);
             selectedButton.setOpaque(false);
@@ -495,10 +495,6 @@ public class MainFrame2 extends javax.swing.JFrame {
         }
         // display how many images loaded
         updateTrack(allFiles.length);
-    }
-
-    public void cleanUp() {
-        imagePanel.removeAll();
     }
 
     private Dimension getScaledDimension(Dimension imgSize, Dimension boundary) {
