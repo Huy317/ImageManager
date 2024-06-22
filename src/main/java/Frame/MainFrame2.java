@@ -58,6 +58,9 @@ public class MainFrame2 extends javax.swing.JFrame {
         setSize(1280, 720);
         setLocationRelativeTo(null);
         setTitle("Image Manager");
+        ImageIcon icon = new ImageIcon("images\\logo.jpg");
+        Image img = icon.getImage();
+        setIconImage(img);
     }
 
     /**

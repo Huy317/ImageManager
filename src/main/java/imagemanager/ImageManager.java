@@ -5,6 +5,7 @@ package imagemanager;
 
 import Frame.*;
 import imagemanager.*;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -27,6 +28,7 @@ public class ImageManager {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
 
         }
+        
         MainFrame2 frame = new MainFrame2();
         frame.setVisible(true);
 
