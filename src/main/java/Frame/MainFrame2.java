@@ -81,7 +81,12 @@ public class MainFrame2 extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         imagePanel = new javax.swing.JPanel();
         propertiesPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        nameArea = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tagsArea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -102,13 +107,18 @@ public class MainFrame2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        TrackerLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         TrackerLabel.setText("0 Images");
+        TrackerLabel.setPreferredSize(new java.awt.Dimension(70, 20));
         jPanel1.add(TrackerLabel);
 
+        searchCategory.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tag", "Name" }));
+        searchCategory.setPreferredSize(new java.awt.Dimension(80, 22));
         jPanel1.add(searchCategory);
 
         searchText.setColumns(25);
+        searchText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchText.setToolTipText("You can enter multiple tags by using space, leave blank to show all");
         searchText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +132,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         });
         jPanel1.add(searchText);
 
+        searchButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,12 +149,30 @@ public class MainFrame2 extends javax.swing.JFrame {
         imagePanel.setLayout(new java.awt.BorderLayout());
         mainPanel.add(imagePanel, java.awt.BorderLayout.CENTER);
 
-        propertiesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Properties"));
+        propertiesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Details"));
         propertiesPanel.setPreferredSize(new java.awt.Dimension(130, 304));
         propertiesPanel.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setText("Tags:");
-        propertiesPanel.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Name:");
+        jPanel3.add(jLabel2, java.awt.BorderLayout.NORTH);
+
+        nameArea.setColumns(10);
+        nameArea.setRows(2);
+        nameArea.setOpaque(false);
+        jScrollPane2.setViewportView(nameArea);
+
+        jPanel3.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        propertiesPanel.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Tags:");
+        jPanel4.add(jLabel3, java.awt.BorderLayout.NORTH);
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -155,7 +184,9 @@ public class MainFrame2 extends javax.swing.JFrame {
         tagsArea.setOpaque(false);
         jScrollPane1.setViewportView(tagsArea);
 
-        propertiesPanel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        propertiesPanel.add(jPanel4, java.awt.BorderLayout.CENTER);
 
         mainPanel.add(propertiesPanel, java.awt.BorderLayout.LINE_END);
 
@@ -263,6 +294,7 @@ public class MainFrame2 extends javax.swing.JFrame {
         imagePreview.revalidate();
     }
 
+    // full name search
     private void showImageWithName(String name) {
         hideAllImages();
         for (ImageButton imgButton : buttonList) {
@@ -274,12 +306,13 @@ public class MainFrame2 extends javax.swing.JFrame {
         imagePreview.repaint();
         imagePreview.revalidate();
     }
-
+    
+    // partial search
     private void showImagesMathchesName(String name) {
         hideAllImages();
         for (ImageButton imgButton : buttonList) {
             Image2 image2 = manager.getImage2(imgButton.getPath());
-            if (image2.getNameWithoutExtension().contains(name)) {
+            if (image2.getName().contains(name)) {
                 imagePreview.add(imgButton);
             }
         }
@@ -376,7 +409,7 @@ public class MainFrame2 extends javax.swing.JFrame {
 //            }
             
             
-            
+            nameArea.setText(selectedImage2.getName());
             tagsArea.setText(sb.toString());
         }
     }
@@ -551,14 +584,19 @@ public class MainFrame2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuButton;
     private javax.swing.JPanel imagePanel;
     private javax.swing.JMenuItem importFolderMenuButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTextArea nameArea;
     private javax.swing.JPanel propertiesPanel;
     private javax.swing.JMenuItem saveMenuButton;
     private javax.swing.JButton searchButton;
