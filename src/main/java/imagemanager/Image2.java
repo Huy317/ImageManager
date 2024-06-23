@@ -16,7 +16,7 @@ public class Image2 implements Serializable {
 
     private String path;
     private final ArrayList<Tag> tags = new ArrayList<>();
-    
+
     /**
      * @param path url of the image i.e: "D:\\Images\example.jpg"
      */
@@ -65,8 +65,8 @@ public class Image2 implements Serializable {
 
     public boolean hasTag(Tag tag) {
         //return tags.contains(tag);
-        for (Tag thisTag : tags){
-            if (thisTag.equals(tag)){
+        for (Tag thisTag : tags) {
+            if (thisTag.equals(tag)) {
                 return true;
             }
         }
@@ -86,7 +86,6 @@ public class Image2 implements Serializable {
 //        }
 //        return true;
 //    }
-
     public boolean addTag(Tag tag) {
         if (hasTag(tag)) {
             return false;
@@ -106,9 +105,20 @@ public class Image2 implements Serializable {
     }
 
     public boolean removeTag(Tag tag) {
-        if (tags.remove(tag)) {
-            tag.decrementCount();
-            return true;
+//        if (tags.remove(tag)) {
+//            tag.decrementCount();
+//            return true;
+//        }
+//        return false;
+        if (tag == null){
+            return false;
+        }
+        
+        for (Tag thisTag : tags) {
+            if (thisTag.equals(tag)) {
+                tags.remove(thisTag);
+                return true;
+            }
         }
         return false;
     }
